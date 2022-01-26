@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JedWatson/react-select.git"
+    "url": "https://github.com/highlight-run/react-select"
   },
   "dependencies": {
     "@atlaskit/button": "^15.1.4",
