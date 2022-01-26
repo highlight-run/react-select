@@ -163,15 +163,15 @@ export default function useAsync<
       } else {
         const request = (lastRequest.current = {});
         setStateInputValue(inputValue);
-        setIsLoading(true);
-        setPassEmptyOptions(!loadedInputValue);
         loadOptions(inputValue, (options) => {
           if (!mounted) return;
           if (request !== lastRequest.current) return;
           lastRequest.current = undefined;
           setIsLoading(false);
           setLoadedInputValue(inputValue);
-          setLoadedOptions(options || []);
+          if (options && options.length > 0) {
+            setLoadedOptions(options);
+          }
           setPassEmptyOptions(false);
           setOptionsCache(
             options ? { ...optionsCache, [inputValue]: options } : optionsCache
@@ -179,13 +179,7 @@ export default function useAsync<
         });
       }
     },
-    [
-      cacheOptions,
-      loadOptions,
-      loadedInputValue,
-      optionsCache,
-      propsOnInputChange,
-    ]
+    [cacheOptions, loadOptions, optionsCache, propsOnInputChange]
   );
 
   const options = passEmptyOptions
